@@ -4,7 +4,7 @@ export default function Home() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch("https://tcs-delivery-backend.onrender.com")
+    fetch("https://https://tcs-delivery-backend-1.onrender.com")
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(err => console.error(err));
