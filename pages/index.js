@@ -1,3 +1,28 @@
+import { useEffect, useState } from "react";
+
 export default function Home() {
-  return <h1>TCS Delivery App is Live</h1>;
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch("https://tcs-delivery-backend.onrender.com")
+      .then(res => res.json())
+      .then(data => setOrders(data))
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>TCS Delivery – Orders</h1>
+
+      {orders.length === 0 && <p>No orders yet</p>}
+
+      {orders.map((order, i) => (
+        <div key={i} style={{ border: "1px solid #ccc", marginBottom: 10, padding: 10 }}>
+          <strong>{order.name}</strong><br />
+          {order.address}<br />
+          Neighborhood: {order.neighborhood}
+        </div>
+      ))}
+    </div>
+  );
 }
